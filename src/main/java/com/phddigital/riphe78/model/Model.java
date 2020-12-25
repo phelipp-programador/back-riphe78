@@ -1,5 +1,9 @@
 package com.phddigital.riphe78.model;
 
-public interface Model {
+import lombok.Data;
 
+
+public interface Model {
+ Integer getId();
+ void setId(Integer id);
 }

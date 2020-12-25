@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-     List<Item> findByNomeContains(String nome);
+    //List<Item> findByNomeContains(String nome);
+    @Query(nativeQuery = true,value = "Select * From ITEM  WHERE LOWER(NOME) LIKE Lower(concat(:nome,'%')) ")
+    List<Item> findByNomeContains(@Param("nome") String nome);
     @Query(nativeQuery = true,value = "Select * From ITEM  WHERE CATEGORIA_ID=:id")
-     List<Item> selectByCategoria(@Param("id") Integer id);
+     List<Item> findByCategoria(@Param("id") Integer id);
 
 }

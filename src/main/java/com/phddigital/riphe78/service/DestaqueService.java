@@ -1,7 +1,6 @@
 package com.phddigital.riphe78.service;
 
 import com.phddigital.riphe78.model.Item;
-import com.phddigital.riphe78.model.Model;
 import com.phddigital.riphe78.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +20,8 @@ public class DestaqueService implements com.phddigital.riphe78.service.Service {
     @Value(value = "${regra.destaque.limite}")
     private int limit;
 
-    @Override
-    public void save(Model entity) {
+
+    public void save(Item entity) {
         // TODO Auto-generated method stub
 
     }
@@ -35,7 +34,7 @@ public class DestaqueService implements com.phddigital.riphe78.service.Service {
      */
     public Optional<List<Item>> selectDestaque() {
 
-        List<Item> select = select(repository);
+        List<Item> select = repository.findAll();
         List<Item> aux = select.stream().filter((Item item) -> item.getLoja().getNota() >= valorMin)
                 .sorted(Comparator.comparing(i -> i.getLoja().getNota())).limit(limit)
                 .collect(Collectors.toList());

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Item {
+public class Item implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

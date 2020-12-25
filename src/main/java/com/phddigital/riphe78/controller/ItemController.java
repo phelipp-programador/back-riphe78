@@ -26,13 +26,22 @@ public class ItemController {
 
     public List<Item> findByName(@RequestParam("name") String name) {
 
-        return service.localiza(name)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+        return service.localiza(name);
     }
 
     @GetMapping("/search/{id}")
     public List<Item> selectOrderCategory(@PathVariable Integer id) {
-        return service.selectByCategoria(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+        return service.selectByCategoria(id);
+
+    }
+
+    @PostMapping
+    public void save(@RequestBody Item item) {
+        service.save(item);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@PathVariable Integer id, @RequestBody Item item) {
+        service.update(id, item);
     }
 }
